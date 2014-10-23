@@ -56,18 +56,22 @@ flockSignal engine = toList <~ do
 -- If a boid goes on to the left, it continues on from the right.
 limitToBorder :: (Int, Int) -> Flock -> Flock
 limitToBorder (w, h) = fmap (\boid -> boid{
-    pos = Vector ((getX $ pos boid) `borderMod` (fromIntegral w))
-                 ((getY $ pos boid) `borderMod` (fromIntegral h))
+    pos = Vector ((getX $ pos boid) `borderMod` fromIntegral w)
+                 ((getY $ pos boid) `borderMod` fromIntegral h)
                  })
     where
         borderMod a b = (a + (b / 2)) `mod'` b - b / 2
 
 drawBoid :: Boid -> Form
-drawBoid boid = rotate (angle - pi / 2 ) $ move (getPos boid) $ filled red $
+drawBoid boid = rotate (angle + correctDir) $ move (getPos boid) $ filled red $
                                     polygon $ path [(-5, 0), (0, 20), (5, 0)]
     where
         angle = atan . getTan $ vel boid
         getTan (Vector x y) = if x == 0 then y else y / x
+        -- correctDir subtracts pi / 2 when x of vel > 0
+        -- and add pi / 2 otherwise. It is because -pi / 2 < atan x < pi / 2
+        -- forall x.
+        correctDir = signum (getX (vel boid)) * pi / 2
 
 render :: (Int, Int) -> [Boid] -> Element
 render (w, h) boids =
