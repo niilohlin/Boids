@@ -2,6 +2,7 @@
 -- e.g (Vector 1 4) * 2 == Vector 2 8.
 module Vector where
 
+-- Why are the doubles strict? I have no good reason for that.
 data Vector = Vector !Double !Double deriving (Eq)
 
 instance Show Vector where
@@ -24,12 +25,6 @@ instance Fractional Vector where
 -- dot product
 (<.>) :: Vector -> Vector -> Double
 (Vector x1 y1) <.> (Vector x2 y2) = x1 * x2 + y1 * y2
-
-xPos :: Vector  -> Double
-xPos (Vector x _) = x
-
-toNum :: Vector -> (Double -> Double -> Double) -> Double
-toNum (Vector x y) f = x `f` y
 
 distance :: Vector -> Vector -> Double
 distance (Vector x1 y1) (Vector x2 y2) = sqrt ((x1 - x2)**2 + (y1 - y2)**2)
