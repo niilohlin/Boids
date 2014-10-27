@@ -11,16 +11,10 @@ instance Comonad PointedList where
     duplicate = positions
     extract (PointedList _ p _) = p
 
-
 data Boid = Boid {pos, vel, acc :: Vector , maxSpeed, maxForce :: Double}
-    deriving (Show)
+    deriving (Show, Eq)
 
--- I think that this is redundant.
-createBoid :: (Double, Double) -> (Double, Double) -> (Double, Double)
-    -> Double -> Double -> Boid
-createBoid p v a ms mf = Boid (toVec p) (toVec v) (toVec a) ms mf
-    where
-        toVec = uncurry Vector
+type Flock = PointedList Boid
 
 -- Update takes a flock and updates the boid that is in focus right now
 -- with respect to the other boids in the flock.
@@ -43,8 +37,6 @@ radius = 80.0
 defaultBoid :: Boid
 defaultBoid = Boid origin origin origin 2.0 0.01
 
-type Flock = PointedList Boid
-
 -- Add all the different flocking behaviours.
 flock :: Flock -> Vector -> Vector
 flock f mousePos =
@@ -52,7 +44,7 @@ flock f mousePos =
         ali = align f
         coh = cohesion f * 0.05
         avo = avoid f mousePos
-    in origin + ali + coh + sep + avo
+    in ali + coh + sep + avo
 
 
 getPos :: Boid -> (Double, Double)

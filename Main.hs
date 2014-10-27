@@ -25,12 +25,15 @@ flockSignal engine = toList <~ do
     transfer2 initState nextState dim' pos'
         where
             -- The fancy =>> operator is the Comonad "extend" operator. Check it out. It's awesome.
+            -- This reads "For all Boids in flock, limit them to border, then update everyone
+            -- with respect to the mouse.
             nextState dim mpos flock' = limitToBorder dim flock' =>> (update (mouseOrtho dim mpos))
-            -- mouseOrtho exist because helm is weird and mixes origo on the middle of the screen
+            -- mouseOrtho exist because helm is weird and mixes origin on the middle of the screen
             -- for drawing and in the upper left corner for the mouse.
             mouseOrtho (w, h) (x, y) = (fromIntegral x - fromIntegral w / 2,
                                         fromIntegral y - fromIntegral h / 2)
             initState = PointedList [] defaultBoid [
+<<<<<<< HEAD
                 Boid (Vector 7 5) 1 0 2 0.01
                ,Boid (Vector 8 6) 1 0 2 0.01
                ,Boid (Vector 9 5) 1 0 2 0.01
@@ -57,6 +60,11 @@ flockSignal engine = toList <~ do
                ,Boid (Vector (4) (0)) 1 0 2 0.01
                ,Boid (Vector (5) (4)) 1 0 2 0.01
                ,Boid (Vector 2 0) 1 0 2 0.01
+=======
+                -- Two boids are mathematically identical if they have the same
+                -- initial position. I did not feel like using random data here.
+                Boid (Vector 2 0) 1 0 2 0.01
+>>>>>>> qcheck
                ,Boid (Vector 3 1) 1 0 2 0.01
                ,Boid (Vector 4 0) 1 0 2 0.01
                ,Boid (Vector 1 4) 1 0 2 0.01
@@ -101,7 +109,7 @@ drawBoid boid = rotate (angle + correctDir) $ move (getPos boid) $ filled red $
         getTan (Vector x y) = if x == 0 then y else y / x
         -- correctDir subtracts pi / 2 when x of vel > 0
         -- and add pi / 2 otherwise. It is because -pi / 2 < atan x < pi / 2
-        -- forall x.
+        -- for all x.
         correctDir = signum (getX (vel boid)) * pi / 2
 
 render :: (Int, Int) -> [Boid] -> Element
