@@ -33,38 +33,9 @@ flockSignal engine = toList <~ do
             mouseOrtho (w, h) (x, y) = (fromIntegral x - fromIntegral w / 2,
                                         fromIntegral y - fromIntegral h / 2)
             initState = PointedList [] defaultBoid [
-<<<<<<< HEAD
-                Boid (Vector 7 5) 1 0 2 0.01
-               ,Boid (Vector 8 6) 1 0 2 0.01
-               ,Boid (Vector 9 5) 1 0 2 0.01
-               ,Boid (Vector 6 9) 1 0 2 0.01
-               ,Boid (Vector 6 6) 1 0 2 0.01
-               ,Boid (Vector 6 5) 1 0 2 0.01
-               ,Boid (Vector 5 6) 1 0 2 0.01
-               ,Boid (Vector (2) 6) 1 0 2 0.01
-               ,Boid (Vector (1) 5) 1 0 2 0.01
-               ,Boid (Vector (4) 9) 1 0 2 0.01
-               ,Boid (Vector (4) 6) 1 0 2 0.01
-               ,Boid (Vector (4) 5) 1 0 2 0.01
-               ,Boid (Vector (5) 6) 1 0 2 0.01
-               ,Boid (Vector 8 (4)) 1 0 2 0.01
-               ,Boid (Vector 9 (-2)) 1 0 2 0.01
-               ,Boid (Vector 6 (1)) 1 0 2 0.01
-               ,Boid (Vector 6 (4)) 1 0 2 0.01
-               ,Boid (Vector 6 (0)) 1 0 2 0.01
-               ,Boid (Vector 5 (4)) 1 0 2 0.01
-               ,Boid (Vector (2) (4)) 1 0 2 0.01
-               ,Boid (Vector (1) (-2)) 1 0 2 0.01
-               ,Boid (Vector (4) (1)) 1 0 2 0.01
-               ,Boid (Vector (4) (4)) 1 0 2 0.01
-               ,Boid (Vector (4) (0)) 1 0 2 0.01
-               ,Boid (Vector (5) (4)) 1 0 2 0.01
-               ,Boid (Vector 2 0) 1 0 2 0.01
-=======
                 -- Two boids are mathematically identical if they have the same
                 -- initial position. I did not feel like using random data here.
                 Boid (Vector 2 0) 1 0 2 0.01
->>>>>>> qcheck
                ,Boid (Vector 3 1) 1 0 2 0.01
                ,Boid (Vector 4 0) 1 0 2 0.01
                ,Boid (Vector 1 4) 1 0 2 0.01
