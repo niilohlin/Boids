@@ -1,0 +1,32 @@
+name:                boids
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/nikita-leonov/boids
+license:             BSD3
+license-file:        LICENSE
+author:              Author name here
+maintainer:          example@example.com
+copyright:           2017 Author name here
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+executable boids-exe
+  hs-source-dirs:      .
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+
+  build-depends:       base >= 4.7 && < 5
+                     , helm == 2.0.0
+                     , linear >= 1.20.7
+                     , random >= 1.1
+                     , comonad >= 5
+                     , pointedlist >= 0.6
+  default-language:    Haskell2010
+  default-extensions:  RecordWildCards
+
+source-repository head
+  type:     git
+  location: https://github.com/nikita-leonov/boids
